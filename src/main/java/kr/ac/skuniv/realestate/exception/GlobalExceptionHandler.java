@@ -61,6 +61,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         logger.info("원본 에러 메세지 : " + e.getMessage());
         logger.info("사용자 정의 에러 메세지 : " + e.getMessage());
         logger.info("Cause : " + e.getCause());
+        logger.info("Cause : " + e.getStackTrace()[0].getMethodName());
+        logger.info("======================================");
         logger.info("======================================");
 
         e.printStackTrace();

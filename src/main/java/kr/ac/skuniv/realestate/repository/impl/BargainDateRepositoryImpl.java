@@ -1,6 +1,7 @@
 package kr.ac.skuniv.realestate.repository.impl;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import kr.ac.skuniv.realestate.aop.AspectExceptionAnnotation;
 import kr.ac.skuniv.realestate.domain.dto.*;
@@ -51,7 +52,7 @@ public class BargainDateRepositoryImpl extends QuerydslRepositorySupport impleme
     }
 
     private JPAQuery<GraphTmpDto> setGraphQuery(JPAQuery<GraphTmpDto> query) {
-        return query.select(Projections.constructor(GraphTmpDto.class, building.type, bargainDate.date, bargainDate.price.avg()))
+        return query.select(Projections.constructor(GraphTmpDto.class, building.type, bargainDate.date, bargainDate.pyPrice.avg()))
                 .from(bargainDate)
                 .join(bargainDate.building, building);
     }

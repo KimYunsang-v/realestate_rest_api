@@ -28,4 +28,5 @@ public class CharterDate {
     @JoinColumn(name = "building_id", insertable = false, updatable = false)
     private Building building;
 
+    private Double pyPrice;
 }

@@ -26,6 +26,8 @@ public class BargainDate {
     @Column(name = "price")
     private Integer price;
 
+    private Double pyPrice;
+
     @ManyToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", insertable = false, updatable = false)
     private Building building;

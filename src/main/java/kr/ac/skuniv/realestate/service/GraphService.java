@@ -163,9 +163,6 @@ public class GraphService {
         Map<String, Double> averageMap = graphServiceUtil.initAverageMap(prevYear, year);
 
         prevYear = firstYear;
-
-
-
         // 값 넣기
         for (GraphTmpDto graphTmpDto : graphTmpDtoList) {
             int currentYear = graphServiceUtil.getDate(graphTmpDto, Calendar.YEAR);
@@ -187,8 +184,17 @@ public class GraphService {
     public GraphDto setAverageListMonth(List<GraphTmpDto> graphTmpDtoList) {
         Map<String, Double> averageMap = graphServiceUtil.initAverageMap(1, 12);
 
+        if(graphTmpDtoList.size() == 0) {
+            return GraphDto.builder().build();
+        }
+
         // 값 넣기
         for (GraphTmpDto graphTmpDto : graphTmpDtoList) {
+            logger.warn("housing type : " + graphTmpDto.getHousingType() + "  deal type : " + graphTmpDto.getDealType()
+                    + " average : " +graphTmpDto.getAverage());
+            if(graphTmpDto.getAverage() == null) {
+                continue;
+            }
             int currentMonth = graphServiceUtil.getDate(graphTmpDto, Calendar.MONTH);
             averageMap.remove(String.valueOf(currentMonth + 1));
             averageMap.put(String.valueOf(currentMonth + 1), Math.round(graphTmpDto.getAverage() * 10) / 10.0);

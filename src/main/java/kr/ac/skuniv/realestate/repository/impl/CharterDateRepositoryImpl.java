@@ -47,7 +47,7 @@ public class CharterDateRepositoryImpl extends QuerydslRepositorySupport impleme
     }
 
     private JPAQuery<GraphTmpDto> setQuery(JPAQuery<GraphTmpDto> query) {
-        return query.select(Projections.constructor(GraphTmpDto.class, building.type, charterDate.date, charterDate.price.avg()))
+        return query.select(Projections.constructor(GraphTmpDto.class, building.type, charterDate.date, charterDate.pyPrice.avg()))
                 .from(charterDate)
                 .join(charterDate.building, building);
     }
