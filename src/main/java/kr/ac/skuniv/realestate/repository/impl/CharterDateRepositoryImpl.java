@@ -61,8 +61,8 @@ public class CharterDateRepositoryImpl extends QuerydslRepositorySupport impleme
         } else if (regionDto.getRegionType() == RegionDto.RegionType.NEIGHBORHOOD) {
             query.where(
                     building.city.eq(regionDto.getCityCode()),
-                    building.groop.eq(regionDto.getGroopCode()));
-//                    building.dong.contains(regionDto.getDongName()));
+                    building.groop.eq(regionDto.getGroopCode()),
+                    building.dong.contains(regionDto.getDongName()));
         }
 
         return query;

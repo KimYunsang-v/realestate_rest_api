@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="realestate_server">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src/main/java" />
+      <root url="file://$PROJECT_DIR$/src/test/java" />
+      <root url="file://$PROJECT_DIR$/target/generated-sources/java" />
+    </SOURCES>
+  </library>
+</component>

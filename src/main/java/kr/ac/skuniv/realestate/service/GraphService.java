@@ -188,16 +188,27 @@ public class GraphService {
             return GraphDto.builder().build();
         }
 
+        Double firstAverage = graphTmpDtoList.get(0).getAverage();
         // 값 넣기
         for (GraphTmpDto graphTmpDto : graphTmpDtoList) {
             logger.warn("housing type : " + graphTmpDto.getHousingType() + "  deal type : " + graphTmpDto.getDealType()
                     + " average : " +graphTmpDto.getAverage());
             if(graphTmpDto.getAverage() == null) {
                 continue;
+            } else {
+                if (firstAverage != null && Math.abs(firstAverage - graphTmpDto.getAverage()) > 500) {
+                    int currentMonth = graphServiceUtil.getDate(graphTmpDto, Calendar.MONTH);
+                    averageMap.remove(String.valueOf(currentMonth + 1));
+                    if (firstAverage > graphTmpDto.getAverage())
+                        averageMap.put(String.valueOf(currentMonth + 1), Math.round((firstAverage-254) * 10) / 10.0);
+                    else averageMap.put(String.valueOf(currentMonth + 1), Math.round((firstAverage+254) * 10) / 10.0);
+                } else{
+                    int currentMonth = graphServiceUtil.getDate(graphTmpDto, Calendar.MONTH);
+                    averageMap.remove(String.valueOf(currentMonth + 1));
+                    averageMap.put(String.valueOf(currentMonth + 1), Math.round(graphTmpDto.getAverage() * 10) / 10.0);
+                    firstAverage = graphTmpDto.getAverage();
+                }
             }
-            int currentMonth = graphServiceUtil.getDate(graphTmpDto, Calendar.MONTH);
-            averageMap.remove(String.valueOf(currentMonth + 1));
-            averageMap.put(String.valueOf(currentMonth + 1), Math.round(graphTmpDto.getAverage() * 10) / 10.0);
         }
 
         double averageValue = graphServiceUtil.getMapAverage(averageMap);
